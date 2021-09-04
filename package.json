@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "deno": "deno run -A --unstable --watch src/index.ts",
     "dev": "shadow-cljs watch server client",
     "prebuild": "rm -rf ./dist",
     "build": "shadow-cljs compile server client",
