@@ -1,0 +1,19 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src"]
+
+ :dependencies
+ [[uix/core "0.0.1-alpha"]
+  [uix/dom  "0.0.1-alpha"]]
+
+ :dev-http
+ {3000 "public"}
+
+ :builds
+ {:server {:target :esm
+           :output-dir "dist/server"
+           :modules {:server {:exports {renderToString app.server/render}}}}
+  :client {:target :esm
+           :output-dir "dist/client"
+           :modules {:client {:exports {render app.client/render}}}
+           :compiler-options {:optimizations :advanced}}}}
