@@ -11,8 +11,10 @@
 
  :builds
  {:server {:target :esm
+           :runtime :custom
            :output-dir "dist/server"
            :modules {:server {:exports {renderToString app.server/render}}}}
+
   :client {:target :esm
            :output-dir "dist/client"
            :modules {:client {:exports {render app.client/render}}}
