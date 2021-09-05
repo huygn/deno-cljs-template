@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "deno": "deno run -A --unstable --watch src/index.ts",
     "dev": "shadow-cljs watch server client",
-    "prebuild": "rm -rf ./dist",
+    "clean": "rm -rf ./dist",
     "build": "shadow-cljs compile server client",
-    "prod": "shadow-cljs release server client"
+    "release": "shadow-cljs release server client"
   },
   "devDependencies": {
+    "husky": "^7.0.2",
     "shadow-cljs": "2.15.8"
   },
   "dependencies": {
