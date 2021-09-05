@@ -5,11 +5,11 @@ async function renderPage() {
   const runtime = new URL("../dist/client/client.js", import.meta.url);
 
   const scriptContent = `
-import { render } from "${runtime.pathname}";
+import { hydrate } from "${runtime.pathname}";
 
 addEventListener("DOMContentLoaded", () => {
   try {
-    render(document.getElementById("root"));
+    hydrate(document.getElementById("root"));
   } catch(err) {
     if (err instanceof Promise) {
       console.error("Render tried to suspend without a suspense boundary.");

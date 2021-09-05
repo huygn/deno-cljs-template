@@ -6,9 +6,6 @@
  [[uix/core "0.0.1-alpha"]
   [uix/dom  "0.0.1-alpha"]]
 
- :dev-http
- {3000 "public"}
-
  :builds
  {:server {:target :esm
            :runtime :custom
@@ -16,6 +13,10 @@
            :modules {:server {:exports {renderToString app.server/render}}}}
 
   :client {:target :esm
+           :runtime :browser
            :output-dir "dist/client"
-           :modules {:client {:exports {render app.client/render}}}
+           :modules {:client {:exports {hydrate app.client/hydrate-app}}}
+           :devtools {:autoload true
+                      :before-load app.client/stop
+                      :after-load app.client/start}
            :compiler-options {:optimizations :advanced}}}}
