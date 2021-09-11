@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "deno": "deno run -A --unstable --watch src/index.ts",
     "dev": "shadow-cljs watch server client",
     "clean": "rm -rf ./dist",
     "build": "shadow-cljs compile server client",

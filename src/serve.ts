@@ -1,5 +1,5 @@
 export async function serve(
-  handler: (req: Request) => Response | Promise<Response>
+  handler: (req: Request) => Response | Promise<Response>,
 ) {
   async function handleConn(conn: Deno.Conn) {
     const httpConn = Deno.serveHttp(conn);
@@ -10,7 +10,8 @@ export async function serve(
     }
   }
 
-  const listener = Deno.listen({ port: 8000 });
+  const port = Deno.env.get("PORT") ?? 8000;
+  const listener = Deno.listen({ port: +port });
   const addr = listener.addr as Deno.NetAddr;
   console.log(`Listening on http://${addr.hostname}:${addr.port}`);
 

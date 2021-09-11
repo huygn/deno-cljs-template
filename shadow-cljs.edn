@@ -10,13 +10,23 @@
  {:server {:target :esm
            :runtime :custom
            :output-dir "dist/server"
-           :modules {:server {:exports {renderToString app.server/render}}}}
+           :modules {:server {:exports {renderPageToString app.server/render
+                                        getPageName app.shared/get-page-name}}}}
 
   :client {:target :esm
            :runtime :browser
            :output-dir "dist/client"
-           :modules {:client {:exports {hydrate app.client/hydrate-app}}}
-           :devtools {:autoload true
-                      :before-load app.client/stop
-                      :after-load app.client/start}
-           :compiler-options {:optimizations :advanced}}}}
+           :devtools {:after-load app.dev/start}
+           :module-loader true
+           :modules {:main {:entries [app.main]}
+                     :dev {:exports {render app.dev/render
+                                     unmount app.dev/unmount}
+                           :depends-on #{:main}}
+                     :client {:exports {hydrate app.client/hydrate}
+                              :depends-on #{:main}}
+                     :home {:exports {Page app.pages.home/page}
+                            :depends-on #{:main}}
+                     :about {:exports {Page app.pages.about/page}
+                             :depends-on #{:main}}}
+           :module-hash-names true
+           :build-options {:manifest-name "manifest.json"}}}}
