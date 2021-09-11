@@ -6,7 +6,7 @@ const config: DenonConfig = {
       cmd: "deno run src/index.ts",
       unstable: true,
       allow: ["read", "env", "run", "net"],
-      env: { PORT: "3000" },
+      env: { PORT: "3000", MODE: "DEV" },
     },
   },
 };

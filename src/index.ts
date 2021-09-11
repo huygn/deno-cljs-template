@@ -1,6 +1,8 @@
 import { getPageName, renderPageToString } from "../dist/server/server.js";
 import { serve } from "./serve.ts";
 
+const IS_DEV = Deno.env.get("MODE") === "DEV";
+
 async function renderPage(req: Request) {
   const { pathname } = new URL(req.url);
 
@@ -9,7 +11,7 @@ async function renderPage(req: Request) {
 
   const { pathname: pageUrl } = new URL(
     `../dist/client/${pageName}.js`,
-    import.meta.url,
+    import.meta.url
   );
   const runtime = new URL("../dist/client/client.js", import.meta.url);
 
@@ -32,6 +34,7 @@ addEventListener("DOMContentLoaded", () => {
   const devScript = () => {
     const devRuntime = new URL("../dist/client/dev.js", import.meta.url);
     return `
+<script type="module">
 import { unmount, render } from "${devRuntime.pathname}";
 
 async function devReload() {
@@ -44,7 +47,8 @@ async function devReload() {
     setTimeout(devReload, 200);
   }
 };
-window.__devReload = devReload;`;
+window.__devReload = devReload;
+</script>`;
   };
 
   const template = `
@@ -56,7 +60,7 @@ window.__devReload = devReload;`;
   </head>
   <body>
     <div id="root">${renderPageToString(pageName)}</div>
-    <script type="module">${devScript()}</script>
+    ${IS_DEV ? devScript() : ""}
   </body>
 </html>
 `;
