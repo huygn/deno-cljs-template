@@ -21,3 +21,5 @@
 
 (defn get-page-name [path]
   (clj->js (get paths-map path)))
+
+(defonce js-paths-map (clj->js paths-map))

@@ -295,6 +295,11 @@ inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.1, inherits@~2.
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+internal-nav-helper@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/internal-nav-helper/-/internal-nav-helper-3.1.0.tgz#32b7085d0bd9c6ba6b61b84f6ba28c7755f9d176"
+  integrity sha512-05fxcHzJqH2ObzfykSSO/WREvMQJtK+O1jhVKcPev0ovlMnJ5vNv0I0EudJx/iQK93/96hFfjjU2tvNQ1h580g==
+
 isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"

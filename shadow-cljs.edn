@@ -11,22 +11,24 @@
            :runtime :custom
            :output-dir "dist/server"
            :modules {:server {:exports {renderPageToString app.server/render
-                                        getPageName app.shared/get-page-name}}}}
+                                        getPageName app.shared/get-page-name
+                                        pathsMap app.shared/js-paths-map}}}}
 
   :client {:target :esm
            :runtime :browser
            :output-dir "dist/client"
-           :devtools {:after-load app.dev/start}
+           :devtools {:after-load app.client/start}
            :module-loader true
            :modules {:main {:entries [app.main]}
-                     :dev {:exports {render app.dev/render
-                                     unmount app.dev/unmount}
-                           :depends-on #{:main}}
-                     :client {:exports {hydrate app.client/hydrate}
+                     :client {:exports {hydrate app.client/hydrate
+                                        unmount app.client/unmount
+                                        render app.client/render
+                                        getNavHelper app.client/get-nav-helper}
                               :depends-on #{:main}}
                      :home {:exports {Page app.pages.home/page}
                             :depends-on #{:main}}
                      :about {:exports {Page app.pages.about/page}
                              :depends-on #{:main}}}
            :module-hash-names true
-           :build-options {:manifest-name "manifest.json"}}}}
+           :build-options {:manifest-name "manifest.json"}
+           :compiler-options {:output-feature-set :es6}}}}

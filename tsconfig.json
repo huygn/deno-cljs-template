@@ -5,10 +5,16 @@
     "experimentalDecorators": true,
     "inlineSourceMap": true,
     "isolatedModules": true,
-    "jsx": "react",
-    "lib": ["esnext"],
-    "module": "esnext",
     "strict": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.unstable"
+    ],
+    "module": "esnext",
     "target": "esnext",
     "useDefineForClassFields": true
   }
