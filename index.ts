@@ -8,7 +8,6 @@ import {
 import { serve } from "./src/serve.ts";
 
 const IS_DEV = Deno.env.get("MODE") === "DEV";
-const { pathname: baseImportUrl } = new URL(import.meta.url);
 const getRoot = `document.getElementById("root")`;
 
 function getPageImportUrl(name: string) {
@@ -25,10 +24,7 @@ async function renderPage(req: Request) {
   const pageName: string = getPageName(pathname);
   if (!pageName) return null;
 
-  const { pathname: pageUrl } = new URL(
-    `./dist/client/${pageName}.js`,
-    import.meta.url
-  );
+  const pageUrl = getPageImportUrl(pageName)
   const runtime = new URL("./dist/client/client.js", import.meta.url);
 
   const mainScript = `
@@ -60,6 +56,7 @@ async function updateUrl(pathname) {
   const { pathname: pageUrl } = new URL("./dist/client/" + pageName + ".js", import.meta.url);
   const { Page } = await import(pageUrl);
   render(Page, ${getRoot});
+  history.pushState(null, null, pathname);
 };
 
 addEventListener("DOMContentLoaded", () => {
@@ -67,11 +64,17 @@ addEventListener("DOMContentLoaded", () => {
   root.addEventListener('click', getNavHelper(updateUrl));
 });`;
 
+  const scriptVer = IS_DEV ? 'development' : 'production'
+  const scripts = `
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.${scriptVer}.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.${scriptVer}.min.js"></script>
+`
   const template = `
 <!DOCTYPE html>
 <html>
   <head>
     <title>Page</title>
+    ${scripts}
     <script type="module">${mainScript}</script>
     <script type="module">${navScript}</script>
   </head>

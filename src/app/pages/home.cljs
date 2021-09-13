@@ -7,7 +7,7 @@
    [helix.hooks :as h]))
 
 (defnc page []
-  (let [[count,set-count] (h/use-state 0)]
+  (let [[count set-count] (h/use-state 0)]
     (<>
      (d/h1 "Home page")
      (d/div

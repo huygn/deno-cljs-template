@@ -30,4 +30,6 @@
                              :depends-on #{:main}}}
            :module-hash-names true
            :build-options {:manifest-name "manifest.json"}
+           :js-options {:resolve {"react" {:target :global
+                                           :global "React"}}}
            :compiler-options {:output-feature-set :es6}}}}
