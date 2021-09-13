@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   getPageName,
   renderPageToString,
@@ -57,7 +59,6 @@ async function updateUrl(pathname) {
   }
   const { pathname: pageUrl } = new URL("./dist/client/" + pageName + ".js", import.meta.url);
   const { Page } = await import(pageUrl);
-  console.log(Page);
   render(Page, ${getRoot});
 };
 
@@ -65,24 +66,6 @@ addEventListener("DOMContentLoaded", () => {
   const root = ${getRoot};
   root.addEventListener('click', getNavHelper(updateUrl));
 });`;
-
-  const devScript = () => {
-    return `
-<script type="module">
-import { render } from "${runtime.pathname}";
-
-async function devReload() {
-  try {
-    const ts = new Date().getTime();
-    const { Page } = await import("${pageUrl}" + "?t=" + ts);
-    render(Page, ${getRoot});
-  } catch (err) {
-    setTimeout(devReload, 200);
-  }
-};
-window.__devReload = devReload;
-</script>`;
-  };
 
   const template = `
 <!DOCTYPE html>
@@ -94,7 +77,6 @@ window.__devReload = devReload;
   </head>
   <body>
     <div id="root">${renderPageToString(pageName)}</div>
-    ${IS_DEV ? devScript() : ""}
   </body>
 </html>
 `;

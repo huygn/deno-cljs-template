@@ -3,8 +3,7 @@
  ["src"]
 
  :dependencies
- [[uix/core "0.0.1-alpha"]
-  [uix/dom  "0.0.1-alpha"]]
+ [[lilactown/helix "0.1.2"]]
 
  :builds
  {:server {:target :esm
@@ -17,11 +16,11 @@
   :client {:target :esm
            :runtime :browser
            :output-dir "dist/client"
-           :devtools {:after-load app.client/start}
+           :devtools {:reload-strategy :full
+                      :preloads [app.dev]}
            :module-loader true
            :modules {:main {:entries [app.main]}
                      :client {:exports {hydrate app.client/hydrate
-                                        unmount app.client/unmount
                                         render app.client/render
                                         getNavHelper app.client/get-nav-helper}
                               :depends-on #{:main}}

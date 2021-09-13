@@ -1,10 +1,9 @@
 (ns app.server
-  (:require [uix.dom.alpha :refer (render-to-string)]
-            [app.shared :refer (get-page)]
-            [app.pages.layout :refer (layout)]
-            ["react-dom/server" :as ReactDOMServer]))
-
-(js/goog.exportSymbol "ReactDOMServer" ReactDOMServer)
+  (:require
+   [app.shared :refer [get-page]]
+   [app.pages.layout :refer [layout]]
+   ["react-dom/server" :as ReactDOMServer]
+   [helix.core :refer [$]]))
 
 (defn render [page]
-  (render-to-string [layout [(get-page page)]]))
+  (ReactDOMServer/renderToString ($ layout ($ (get-page page)))))

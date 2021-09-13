@@ -1,19 +1,16 @@
 (ns app.client
-  (:require
-   [uix.dom.alpha :as uix.dom]
-   [app.pages.layout :refer (layout)]
-   ["internal-nav-helper" :refer (getNavHelper)]))
+  (:require ["react-dom" :as rdom]
+            ["internal-nav-helper" :refer (getNavHelper)]
+            [helix.core :refer [$]]
+            [app.pages.layout :refer [layout]]))
+
+(defn wrapped-page [component]
+  ($ layout ($ component)))
 
 (defn hydrate [component node]
-  (uix.dom/hydrate [layout [component]] node))
+  (rdom/hydrate (wrapped-page component) node))
 
 (defn render [component node]
-  (uix.dom/render [layout [component]] node))
-
-(defn unmount [node]
-  (uix.dom/unmount-at-node node))
+  (rdom/render (wrapped-page component) node))
 
 (def get-nav-helper getNavHelper)
-
-(defn ^:dev/after-load start []
-  (.__devReload js/window))
