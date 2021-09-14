@@ -69,6 +69,7 @@ addEventListener("DOMContentLoaded", () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.${scriptVer}.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.${scriptVer}.min.js"></script>
 `
+
   const template = `
 <!DOCTYPE html>
 <html>

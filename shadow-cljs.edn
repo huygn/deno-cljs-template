@@ -19,17 +19,18 @@
            :devtools {:reload-strategy :full
                       :preloads [app.dev]}
            :module-loader true
-           :modules {:main {:entries [app.main]}
+           :modules {:shared {}
                      :client {:exports {hydrate app.client/hydrate
                                         render app.client/render
                                         getNavHelper app.client/get-nav-helper}
-                              :depends-on #{:main}}
+                              :depends-on #{:shared}}
                      :home {:exports {Page app.pages.home/page}
-                            :depends-on #{:main}}
+                            :depends-on #{:shared}}
                      :about {:exports {Page app.pages.about/page}
-                             :depends-on #{:main}}}
+                             :depends-on #{:shared}}}
            :module-hash-names true
            :build-options {:manifest-name "manifest.json"}
            :js-options {:resolve {"react" {:target :global
-                                           :global "React"}}}
-           :compiler-options {:output-feature-set :es6}}}}
+                                           :global "React"}
+                                  "react-dom" {:target :global
+                                               :global "ReactDOM"}}}}}}
