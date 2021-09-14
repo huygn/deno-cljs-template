@@ -48,7 +48,19 @@ addEventListener("DOMContentLoaded", () => {
 import { render, getNavHelper } from "${runtime.pathname}";
 const pathsMap = ${JSON.stringify(pathsMap)};
 
+addEventListener("DOMContentLoaded", () => {
+  const root = ${getRoot};
+  root.addEventListener('click', getNavHelper(updateUrl));
+});
+
+addEventListener('popstate', onPopstate);
+
 async function updateUrl(pathname) {
+  await renderPage(pathname);
+  history.pushState(null, null, pathname);
+};
+
+async function renderPage(pathname) {
   const pageName = pathsMap[pathname];
   if (!pageName) {
     return;
@@ -56,13 +68,13 @@ async function updateUrl(pathname) {
   const { pathname: pageUrl } = new URL("./dist/client/" + pageName + ".js", import.meta.url);
   const { Page } = await import(pageUrl);
   render(Page, ${getRoot});
-  history.pushState(null, null, pathname);
-};
+}
 
-addEventListener("DOMContentLoaded", () => {
-  const root = ${getRoot};
-  root.addEventListener('click', getNavHelper(updateUrl));
-});`;
+async function onPopstate() {
+  const { pathname } = document.location;
+  await renderPage(pathname);
+}
+`;
 
   const scriptVer = IS_DEV ? 'development' : 'production'
   const scripts = `
