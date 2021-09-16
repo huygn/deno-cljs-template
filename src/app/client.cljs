@@ -10,17 +10,17 @@
 (defn render [component node]
   (rdom/render (final-page component) node))
 
+(defonce pages-map
+  {:home
+   (lazy/loadable app.pages.home/page)
+
+   :about
+   (lazy/loadable app.pages.about/page)})
+
 (defn load-page! [path]
-  (case (name-from-path path)
-    :home
-    (-> (lazy/loadable app.pages.home/page)
-        (lazy/load))
-
-    :about
-    (-> (lazy/loadable app.pages.about/page)
-        (lazy/load))
-
-    nil))
+  (-> (name-from-path path)
+      pages-map
+      (lazy/load)))
 
 (defn get-root []
   (.getElementById js/document "root"))

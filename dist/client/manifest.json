@@ -1,6 +1,6 @@
 [{"module-id":"shared",
   "name":"shared",
-  "output-name":"shared.F0CE22E7F19E74A7551219928D578F6A.js",
+  "output-name":"shared.386F8CFB4F17728328E982E86E73C952.js",
   "entries":["shadow.loader"],
   "depends-on":null,
   "sources":
@@ -63,7 +63,7 @@
    "shadow/module/shared/append.js"]},
  {"module-id":"client",
   "name":"client",
-  "output-name":"client.FC07FBB04565AB5E90AF8C0076E9C8C8.js",
+  "output-name":"client.59306667126E1EACFB18AA704715D9ED.js",
   "entries":["app.client", "app.client"],
   "depends-on":["shared"],
   "sources":
