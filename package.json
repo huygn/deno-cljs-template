@@ -7,7 +7,8 @@
     "dev": "shadow-cljs watch server client",
     "clean": "rm -rf ./dist",
     "build": "shadow-cljs compile server client",
-    "release": "shadow-cljs release server client"
+    "release": "shadow-cljs release server client",
+    "start": "deno run -A --unstable index.ts"
   },
   "devDependencies": {
     "husky": "^7.0.2",
@@ -15,12 +16,16 @@
   },
   "dependencies": {
     "internal-nav-helper": "^3.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-refresh": "0.8.1"
   },
   "volta": {
     "node": "16.8.0",
     "yarn": "1.22.11"
+  },
+  "resolutions": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }

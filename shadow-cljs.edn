@@ -13,24 +13,20 @@
                                         getPageName app.shared/get-page-name
                                         pathsMap app.shared/js-paths-map}}}}
 
-  :client {:target :esm
-           :runtime :browser
+  :client {:target :browser
            :output-dir "dist/client"
+           :asset-path "/dist/client"
            :devtools {:reload-strategy :full
                       :preloads [app.dev]}
            :module-loader true
-           :modules {:shared {}
-                     :client {:exports {hydrate app.client/hydrate
-                                        render app.client/render
-                                        getNavHelper app.client/get-nav-helper}
+           :modules {:shared {:entries []}
+                     :client {:init-fn app.client/init!
+                              :entries [app.client]
                               :depends-on #{:shared}}
-                     :home {:exports {Page app.pages.home/page}
+                     :home {:entries [app.pages.home]
                             :depends-on #{:shared}}
-                     :about {:exports {Page app.pages.about/page}
+                     :about {:entries [app.pages.about]
                              :depends-on #{:shared}}}
            :module-hash-names true
            :build-options {:manifest-name "manifest.json"}
-           :js-options {:resolve {"react" {:target :global
-                                           :global "React"}
-                                  "react-dom" {:target :global
-                                               :global "ReactDOM"}}}}}}
+           :compiler-options {:output-feature-set :es5}}}}
