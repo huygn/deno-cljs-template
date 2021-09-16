@@ -1,6 +1,6 @@
 [{"module-id":"shared",
   "name":"shared",
-  "output-name":"shared.21DBA3DAE8AAB1C0F952CE6B5EB2FD12.js",
+  "output-name":"shared.F0CE22E7F19E74A7551219928D578F6A.js",
   "entries":["shadow.loader"],
   "depends-on":null,
   "sources":
@@ -63,7 +63,7 @@
    "shadow/module/shared/append.js"]},
  {"module-id":"client",
   "name":"client",
-  "output-name":"client.887605422B37E30437F0EEBF8BA02497.js",
+  "output-name":"client.FC07FBB04565AB5E90AF8C0076E9C8C8.js",
   "entries":["app.client", "app.client"],
   "depends-on":["shared"],
   "sources":
@@ -73,8 +73,8 @@
    "node_modules/react-dom/cjs/react-dom.production.min.js",
    "node_modules/react-dom/index.js",
    "node_modules/internal-nav-helper/dist/index.js",
-   "app/pages/layout.cljs", "shadow/lazy.cljs", "app/client.cljs",
-   "shadow/module/client/append.js"]},
+   "app/pages/layout.cljs", "app/shared.cljs", "shadow/lazy.cljs",
+   "app/client.cljs", "shadow/module/client/append.js"]},
  {"module-id":"home",
   "name":"home",
   "output-name":"home.8E0D4F70E526E7BB6E2C8AFA9AD53120.js",

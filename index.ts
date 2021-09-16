@@ -1,4 +1,4 @@
-import { getPageName, renderPageToString } from "./src/server.ts";
+import { renderPageToString } from "./src/server.ts";
 import { serve } from "./src/serve.ts";
 import { ModulesMap } from "./src/modules.ts";
 
@@ -13,8 +13,8 @@ serve(handleRequest);
 async function renderPage(req: Request) {
   const { pathname } = new URL(req.url);
 
-  const pageName: string = getPageName(pathname);
-  if (!pageName) return null;
+  const pageContent = renderPageToString(pathname);
+  if (!pageContent) return null;
 
   const modules = {
     shared: modulesMap.getFileName("shared"),
@@ -28,7 +28,7 @@ async function renderPage(req: Request) {
     <title>Page</title>
   </head>
   <body>
-    <div id="root">${renderPageToString(pageName)}</div>
+    <div id="root">${pageContent}</div>
     <script src="${modules.shared}" type="text/javascript"></script>
     <script defer src="${modules.client}" type="text/javascript"></script>
   </body>

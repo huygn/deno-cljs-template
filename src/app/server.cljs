@@ -1,9 +1,18 @@
 (ns app.server
   (:require
-   [app.shared :refer [get-page]]
-   [app.pages.layout :refer [layout]]
-   ["react-dom/server" :as ReactDOMServer]
-   [helix.core :refer [$]]))
+   [app.shared :refer [name-from-path final-page]]
+   [app.pages.home :refer (page) :rename {page home}]
+   [app.pages.about :refer (page) :rename {page about}]
+   ["react-dom/server" :as ReactDOMServer]))
 
-(defn render [page]
-  (ReactDOMServer/renderToString ($ layout ($ (get-page page)))))
+(defonce pages-map
+  {:home home
+   :about about})
+
+(defn get-page [path]
+  (-> (name-from-path path) pages-map))
+
+(defn render [path]
+  (let [page (get-page path)]
+    (when page
+      (ReactDOMServer/renderToString (final-page page)))))

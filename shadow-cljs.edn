@@ -9,9 +9,7 @@
  {:server {:target :esm
            :runtime :custom
            :output-dir "dist/server"
-           :modules {:server {:exports {renderPageToString app.server/render
-                                        getPageName app.shared/get-page-name
-                                        pathsMap app.shared/js-paths-map}}}}
+           :modules {:server {:exports {renderPageToString app.server/render}}}}
 
   :client {:target :browser
            :output-dir "dist/client"

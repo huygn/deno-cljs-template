@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev": "shadow-cljs watch server client",
     "clean": "rm -rf ./dist",
+    "dev": "shadow-cljs watch server client",
+    "predev": "npm run clean",
     "build": "shadow-cljs compile server client",
     "release": "shadow-cljs release server client",
+    "prerelease": "npm run clean",
     "start": "deno run -A --unstable index.ts"
   },
   "devDependencies": {

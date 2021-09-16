@@ -1,30 +1,26 @@
 (ns app.client
   (:require ["react-dom" :as rdom]
             ["internal-nav-helper" :refer (getNavHelper)]
-            [helix.core :refer [$]]
-            [app.pages.layout :refer [layout]]
-            [shadow.lazy :as lazy]
-            [clojure.string :as str]))
-
-(defn wrapped-page [component]
-  ($ layout ($ component)))
+            [app.shared :refer [final-page name-from-path]]
+            [shadow.lazy :as lazy]))
 
 (defn hydrate [component node]
-  (rdom/hydrate (wrapped-page component) node))
+  (rdom/hydrate (final-page component) node))
 
 (defn render [component node]
-  (rdom/render (wrapped-page component) node))
+  (rdom/render (final-page component) node))
 
 (defn load-page! [path]
-  (let [[_ & tokens] (str/split path #"/")]
-    (case tokens
-      nil
-      (-> (lazy/loadable app.pages.home/page)
-          (lazy/load))
+  (case (name-from-path path)
+    :home
+    (-> (lazy/loadable app.pages.home/page)
+        (lazy/load))
 
-      ["about"]
-      (-> (lazy/loadable app.pages.about/page)
-          (lazy/load)))))
+    :about
+    (-> (lazy/loadable app.pages.about/page)
+        (lazy/load))
+
+    nil))
 
 (defn get-root []
   (.getElementById js/document "root"))
