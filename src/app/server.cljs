@@ -1,6 +1,6 @@
 (ns app.server
   (:require
-   [app.shared :refer [name-from-path final-page]]
+   [app.shared :refer [path->name final-page]]
    [app.pages.home :refer (page) :rename {page home}]
    [app.pages.about :refer (page) :rename {page about}]
    ["react-dom/server" :as ReactDOMServer]))
@@ -9,10 +9,9 @@
   {:home home
    :about about})
 
-(defn get-page [path]
-  (-> (name-from-path path) pages-map))
+(defn path->page [path]
+  (-> (path->name path) pages-map))
 
 (defn render [path]
-  (let [page (get-page path)]
-    (when page
-      (ReactDOMServer/renderToString (final-page page)))))
+  (when-let [page (path->page path)]
+    (ReactDOMServer/renderToString (final-page page))))

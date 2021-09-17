@@ -4,7 +4,7 @@
    [helix.core :refer [$]]
    [app.pages.layout :refer [layout]]))
 
-(defn name-from-path [path]
+(defn path->name [path]
   (let [[_ & tokens] (str/split path #"/")]
     (case tokens
       nil
