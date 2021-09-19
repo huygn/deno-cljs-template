@@ -1,23 +1,19 @@
 (ns app.shared
-  (:require [app.pages.home :refer (page) :rename {page home}]
-            [app.pages.about :refer (page) :rename {page about}]))
+  (:require
+   [clojure.string :as str]
+   [helix.core :refer [$]]
+   [app.pages.layout :refer [layout]]))
 
-(defonce pages-map
-  {:home {:path "/"
-          :component home}
-   :about {:path "/about"
-           :component about}})
+(defn path->name [path]
+  (let [[_ & tokens] (str/split path #"/")]
+    (case tokens
+      nil
+      :home
 
-(defonce paths-map
-  (reduce (fn [prev [k v]]
-            (assoc prev (:path v) k))
-          {}
-          pages-map))
+      ["about"]
+      :about
 
-(defn get-page [name]
-  (-> (keyword name)
-      pages-map
-      :component))
+      nil)))
 
-(defn get-page-name [path]
-  (clj->js (get paths-map path)))
+(defn final-page [component]
+  ($ layout ($ component)))

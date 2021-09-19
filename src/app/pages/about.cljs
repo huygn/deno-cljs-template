@@ -1,11 +1,9 @@
 (ns app.pages.about
-  (:require [uix.core.alpha :as uix]
-            [app.main :refer (button)]))
+  (:require
+   [app.lib :refer [defnc]]
+   [helix.core :refer [<>]]
+   [helix.dom :as d]))
 
-(defn page []
-  (let [state* (uix/state 0)]
-    [:<>
-     [:h1 "About page"]
-     [button {:on-click #(swap! state* dec)} "-"]
-     [:span @state*]
-     [button {:on-click #(swap! state* inc)} "+"]]))
+(defnc page []
+  (<>
+   (d/h1 "About page")))

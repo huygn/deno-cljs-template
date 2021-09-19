@@ -1,12 +1,7 @@
 (ns app.dev
-  (:require
-   [uix.dom.alpha :as uix.dom]))
+  (:require [helix.experimental.refresh :as r]))
 
-(defn render [component node]
-  (uix.dom/render [component] node))
+(r/inject-hook!)
 
-(defn unmount [node]
-  (uix.dom/unmount-at-node node))
-
-(defn ^:dev/after-load start []
-  (.__devReload js/window))
+(defn ^:dev/after-load refresh []
+  (r/refresh!))

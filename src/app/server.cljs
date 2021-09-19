@@ -1,9 +1,17 @@
 (ns app.server
-  (:require [uix.dom.alpha :refer (render-to-string)]
-            [app.shared :refer (get-page)]
-            ["react-dom/server" :as ReactDOMServer]))
+  (:require
+   [app.shared :refer [path->name final-page]]
+   [app.pages.home :refer (page) :rename {page home}]
+   [app.pages.about :refer (page) :rename {page about}]
+   ["react-dom/server" :as ReactDOMServer]))
 
-(js/goog.exportSymbol "ReactDOMServer" ReactDOMServer)
+(defonce pages-map
+  {:home home
+   :about about})
 
-(defn render [page]
-  (render-to-string [(get-page page)]))
+(defn path->page [path]
+  (-> (path->name path) pages-map))
+
+(defn render [path]
+  (when-let [page (path->page path)]
+    (ReactDOMServer/renderToString (final-page page))))
