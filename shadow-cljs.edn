@@ -27,4 +27,4 @@
                              :depends-on #{:shared}}}
            :module-hash-names true
            :build-options {:manifest-name "manifest.json"}
-           :compiler-options {:output-feature-set :es5}}}}
+           :compiler-options {:output-feature-set :es6}}}}
