@@ -11,6 +11,7 @@ pom.xml.asc
 *.jar
 *.log
 .shadow-cljs
+.clj-kondo/.cache
 .lsp
 .idea
 .lein-*
