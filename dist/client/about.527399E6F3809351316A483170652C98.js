@@ -1,3 +1,0 @@
-(function(){
-'use strict';$APP.si=function(a){$APP.Xm(a);$APP.t(!1)&&$APP.t(yn)&&(yn.H?yn.H():yn.call(null));return $APP.Pn.createElement($APP.fi,null,$APP.Pn.createElement("h1",null,"About page"))};$APP.ak("about");if($APP.t(!1))var yn=$APP.Zm();$APP.t(!1)&&($APP.t(yn)&&(yn.D?yn.D($APP.si,"",null,null):yn.call(null,$APP.si,"",null,null)),$APP.Ym($APP.si,"app.pages.about/page"));$APP.Zj.$c();
-}).call(this);

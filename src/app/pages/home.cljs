@@ -1,16 +1,15 @@
 (ns app.pages.home
   (:require
-   [app.lib :refer [defnc]]
+   [app.lib :refer [defc]]
    [app.main :refer [button]]
-   [helix.core :refer [$ <>]]
-   [helix.dom :as d]
+   [helix.core :refer [$]]
    [helix.hooks :as h]))
 
-(defnc page []
+(defc page []
   (let [[count set-count] (h/use-state 0)]
-    (<>
-     (d/h1 "Home page")
-     (d/div
+    [:*
+     [:h1 "Home page"]
+     [:div
       ($ button {:on-click #(set-count dec)} "-")
-      (d/span count)
-      ($ button {:on-click #(set-count inc)} "+")))))
+      [:span count]
+      ($ button {:on-click #(set-count inc)} "+")]]))

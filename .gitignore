@@ -12,6 +12,7 @@ pom.xml.asc
 *.log
 .shadow-cljs
 .clj-kondo/.cache
+.cpcache
 .lsp
 .idea
 .lein-*
