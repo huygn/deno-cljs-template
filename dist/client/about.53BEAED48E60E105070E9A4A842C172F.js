@@ -1,0 +1,3 @@
+(function(){
+'use strict';$APP.si=function(a){$APP.Xm(a);$APP.t(!1)&&$APP.t(dn)&&(dn.H?dn.H():dn.call(null));return $APP.Pn.createElement($APP.fi,null,$APP.Pn.createElement("h1",null,"About page"))};$APP.ak("about");if($APP.t(!1))var dn=$APP.Zm();$APP.t(!1)&&($APP.t(dn)&&(dn.D?dn.D($APP.si,"",null,null):dn.call(null,$APP.si,"",null,null)),$APP.Ym($APP.si,"app.pages.about/page"));$APP.Zj.$c();
+}).call(this);

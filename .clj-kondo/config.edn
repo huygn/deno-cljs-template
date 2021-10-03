@@ -1,2 +1,1 @@
-{:lint-as {app.lib/defnc clojure.core/defn
-           app.lib/defc clojure.core/defn}}
+{:lint-as {app.lib/defnc clojure.core/defn}}
